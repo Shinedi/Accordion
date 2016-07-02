@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>手风琴</title>
+<style>
+*{ 
+margin:0;
+padding:0;
+border:0;}
+#box{
+	width:520px;
+	height:220px;
+	position:relative;
+	margin:50px auto;
+	}
+	.sdiv{
+		width:400px;
+		height:220px;
+		}
+	#div1{
+		background:url(images/17.jpg);
+		position:absolute;
+		left:120px;
+		top:0;}
+	#div2{
+		background:url(images/18.jpg);
+		position:absolute;
+		left:80px;
+		top:0;}
+	#div3{
+		background:url(images/19.jpg);
+		position:absolute;
+		left:40px;
+		top:0;}
+	#div4{
+		background:url(images/21.jpg);
+		position:absolute;
+		left:0px;
+		top:0;}
+	span{
+			width:52px;
+			height:220px;
+			position:absolute;
+			right:0px;
+			top:0px;
+			text-align:center;
+			background:#C9F;
+			font-size:18px;
+			font-weight:700;
+			color:#93C;
+			border-right:2px solid #99C;}
+</style>
+</head>
+
+<body>
+<div id="box">
+	<div id="div1" class="sdiv">
+    	<span><br/><br/>第<br/>一<br/>层</span>
+    </div>
+    <div id="div2" class="sdiv">
+    	<span><br/><br/>第<br/>二<br/>层</span>
+    </div>
+    <div id="div3" class="sdiv">
+    	<span><br/><br/>第<br/>三<br/>层</span>
+    </div>
+    <div id="div4" class="sdiv">
+    	<span><br/><br/>第<br/>四<br/>层</span>
+    </div>
+</div>
+<script>
+window.onload=function(){
+	var obox=document.getElementById("box");
+	var adiv=obox.getElementsByTagName("div");
+	var m=adiv.length;
+	var n=52;
+	for(var i=0;i<m;i++)
+	{
+		adiv[i].index=i;
+		adiv[i].onclick=function(){
+			if(n==52)
+			{
+				for(var j=m-1;j>this.index;j--)
+				{
+					sportFrame(timer,adiv[j],52);
+				}
+			}
+			else if(n==400)
+			{
+				for(var j=0;j<=this.index;j++)
+				{
+					sportFrame(timer,adiv[j],400);
+				}
+			}
+			if(adiv[this.index].offsetWidth==52)
+			{
+				n=400;
+			}
+			if(adiv[this.index].offsetWidth==400)
+			{
+				n=52;
+			}
+			};
+	}
+	};
+var timer=null;
+function sportFrame(timer,obj,target)
+{
+	var speed=0;
+	timer=setInterval(function(){
+		speed=(target-obj.offsetWidth)/10;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		if(target==obj.offsetWidth)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+		},30);
+		
+	
+}	
+</script>
+</body>
+</html>

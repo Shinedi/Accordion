@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>手风琴</title>
+<style>
+*{margin:0;
+padding:0;
+border:0;}
+#box { position:relative;
+	   margin:50px auto;
+	   width:520px;
+	   height:220px;   
+}
+#box img{width:100%;
+		 height:100%;}
+#div1 {
+	   position:absolute;
+	   left:120px;
+	   top:0px;
+}		
+#div2 { 
+	   position:absolute;
+	   left:80px;
+	   top:0px;
+}
+#div3{ 
+	   position:absolute;
+	   left:40px;
+	   top:0px;
+}
+#div4 { 
+	   position:absolute;
+	   left:0px;
+	   top:0px;
+}
+.sdiv{
+	   width:400px;
+	   height:220px;}
+	
+</style>
+</head>
+
+<body>
+<div id="box">
+	<div id="div1" class="sdiv">
+    	<img src="images/17.jpg" />
+    </div>
+    <div id="div2" class="sdiv">
+    	<img src="images/18.jpg" />
+    </div>
+    <div id="div3" class="sdiv">
+    	<img src="images/19.jpg" />
+    </div>
+    <div id="div4" class="sdiv">
+    	<img src="images/21.jpg" />
+    </div>
+</div>
+<script>
+window.onload=function(){
+	var obox=document.getElementById("box");
+	var adiv=obox.getElementsByTagName("div");
+	var m=adiv.length;
+	var n=52;
+	for(var i=0;i<m;i++)
+	{
+		adiv[i].index=i;
+		adiv[i].onclick=function(){
+			if(n==52)
+			{
+				for(var j=m-1;j>this.index;j--)
+				{
+					sportFrame(timer,adiv[j],52);
+				}
+			}
+			else if(n==400)
+			{
+				for(var j=0;j<=this.index;j++)
+				{
+					sportFrame(timer,adiv[j],400);
+				}
+			}
+			if(adiv[this.index].offsetWidth==52)
+			{
+				n=400;
+			}
+			if(adiv[this.index].offsetWidth==400)
+			{
+				n=52;
+			}
+			};
+	}
+	};
+var timer=null;
+function sportFrame(timer,obj,target)
+{
+	var speed=0;
+	timer=setInterval(function(){
+		speed=(target-obj.offsetWidth)/10;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		if(target==obj.offsetWidth)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+		},30);
+}	
+</script>
+</body>
+</html>
